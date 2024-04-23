@@ -15,6 +15,8 @@ import { HamburgetMenuClose, HamburgetMenuOpen } from "./Icons";
 const navigation = [
   { name: "Home", path: "/" },
   { name: "Profile", path: "/profile" },
+  { name: "Blogs", path: "/blog" },
+
   { name: "About", path: "/About" },
   { name: "LogIn", path: "/login" },
   { name: "Sign up", path: "/signup" },

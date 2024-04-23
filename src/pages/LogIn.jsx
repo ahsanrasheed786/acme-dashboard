@@ -37,6 +37,7 @@ const LoginForm = () => {
   };
 
   return (
+    <>
     <div className="flex items-center justify-center h-screen">
       <form
         onSubmit={handleSubmit}
@@ -83,6 +84,8 @@ const LoginForm = () => {
             </button>
       </form>
     </div>
+
+    </>
   );
 };
 
