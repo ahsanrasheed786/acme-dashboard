@@ -11,7 +11,8 @@ import { Toaster } from "react-hot-toast"
 // import BlogList from "./pages/BlogList"
 import DisplayBlogs from "./pages/Testing"
 import AllBlogs from "./pages/AllBlogs"
-import SingleBlog from "./components/SingleBlog"
+import SingleBlog from "./components/Blog/SingleBlog"
+import CreateNewBlog from "./components/Blog/CreateNewBlog"
 // import Blogs from "./pages/BlogList"
 // import DisplayBlogs from "./pages/Testing"
 
@@ -35,6 +36,8 @@ function App() {
     <Route path="/testing" element={<DisplayBlogs/>} />
     <Route path="/allblogs" element={<AllBlogs/>} />
     <Route path="/detailblog/:id" element={<SingleBlog/>} />
+    <Route path="/createblog/" element={<CreateNewBlog/>} />
+
 
 
 
