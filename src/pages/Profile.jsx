@@ -216,7 +216,7 @@ const  offTimeHandler = async() => {
               
               
               {/* off on toggel button */}
-              <label className="flex items-center cursor-pointer">
+       <label className="flex items-center cursor-pointer">
       <div className="relative">
         <input
           type="checkbox"
@@ -228,7 +228,7 @@ const  offTimeHandler = async() => {
         <div className={`toggle__dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition ${isChecked ? 'translate-x-full bg-green-500' : 'bg-red-500'}`}></div>
       </div>
       <div className="ml-3 text-gray-700 font-medium">{isChecked? 'ON' : 'OFF'}</div>
-             </label>
+     </label>
               {/* off on toggel button */}
 
               

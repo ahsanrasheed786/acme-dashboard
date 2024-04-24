@@ -19,6 +19,10 @@ const LoginForm = () => {
       const response = await axios.post('http://localhost:8000/api/user/login', {
         username,
         password,
+      }, {
+        headers: { 'Content-Type': 'application/json' },
+        
+        withCredentials: true,
       });
       if (response.data.success) {
         setIsLoggedIn(response.data.success);
@@ -39,10 +43,10 @@ const LoginForm = () => {
   return (
     <>
     <div className="flex items-center justify-center h-screen">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-sm bg-white rounded-lg shadow-md p-8 space-y-6"
-      >
+        {/* onSubmit={handleSubmit} */}
+        
+        <div className="w-full max-w-sm bg-white rounded-lg shadow-md p-8 space-y-6">
+      
         <h2 className="text-2xl font-bold text-center">Login</h2>
         <div className="relative">
           <input
@@ -70,8 +74,8 @@ const LoginForm = () => {
           {isLoading ? 'Logging in...' : 'Login'}
         </button> */}
 
-<button
-              type="submit"
+<button onClick={handleSubmit}
+              type="button"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               {isLoading ? (
@@ -82,9 +86,8 @@ const LoginForm = () => {
               ) : null}
               {isLoading ? "Logging in..." : "Login"}
             </button>
-      </form>
     </div>
-
+    </div>
     </>
   );
 };

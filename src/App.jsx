@@ -2,7 +2,6 @@ import { BrowserRouter as Router , Routes, Route } from "react-router-dom"
 import Home from "./pages/Home"
 import About from "./pages/About"
 import LogIn from "./pages/LogIn"
-import SignUp from "./pages/SignUp"
 import Profile from "./pages/Profile"
 
 // import Footer from "./components/footer/Footer"
@@ -13,13 +12,12 @@ import DisplayBlogs from "./pages/Testing"
 import AllBlogs from "./pages/AllBlogs"
 import SingleBlog from "./components/Blog/SingleBlog"
 import CreateNewBlog from "./components/Blog/CreateNewBlog"
+import Signup from "./components/SignUp"
 // import Blogs from "./pages/BlogList"
 // import DisplayBlogs from "./pages/Testing"
 
 
 function App() {
-  // const server='http://localhost:8000/api'
-
   return (
     
 
@@ -29,13 +27,13 @@ function App() {
     <Route path="/" element={<Home />} />
     <Route path="/about" element={<About />} />
     <Route path="/profile/:id" element={<Profile/>} />
-    <Route path="login" element={<LogIn />} />
-    <Route path="signup" element={<SignUp />} />
+    <Route path="/login" element={<LogIn />} />
+    <Route path="/add/new/employee/signup" element={<Signup />} />
     {/* <Route path="/blog" element={<Blogs />} /> */}
     {/* <Route path="/testing" element={<BlogList/>} /> */}
     <Route path="/testing" element={<DisplayBlogs/>} />
     <Route path="/allblogs" element={<AllBlogs/>} />
-    <Route path="/detailblog/:id" element={<SingleBlog/>} />
+    <Route path="/blogdetail/:id" element={<SingleBlog/>} />
     <Route path="/createblog/" element={<CreateNewBlog/>} />
 
 

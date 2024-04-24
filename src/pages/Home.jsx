@@ -27,6 +27,13 @@ fetchData()
 
   return (
     <>
+
+    <div className="flex justify-end mr-8 mt-8 sticky z-10">
+    <Link to={'/add/new/employee/signup'}>
+<div className="bg-green-600 p-4 rounded-lg shadow-lg hover:bg-green-500 text-white">+ Add New Employee</div>
+    </Link>
+    </div>
+   
    <main className="flex flex-wrap justify-center items-center gap-16">
 
 {
