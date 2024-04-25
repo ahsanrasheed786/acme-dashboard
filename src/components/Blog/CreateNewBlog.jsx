@@ -52,7 +52,10 @@ const CreateNewBlog = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/blog/createblog', blogData);
+      const response = await axios.post('http://localhost:8000/api/blog/createblog', blogData, {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
+      });
       console.log(response);
       toast.success(response.data.message);
     } catch (error) {
@@ -65,7 +68,7 @@ const CreateNewBlog = () => {
 
   return (
     <div className="max-w-lg mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Create Blog</h2>
+      <h2 className="text-2xl font-bold my-8">Create New Case Study</h2>
       <label htmlFor="heading" className="block mb-2">Heading:</label>
       <input type="text" id="heading" name="heading" placeholder="Heading" value={blogData.heading} onChange={handleChange} required className="input" />
 

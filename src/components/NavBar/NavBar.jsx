@@ -18,8 +18,8 @@ const navigation = [
   { name: "Blogs", path: "/allblogs" },
 
   { name: "About", path: "/About" },
+  { name: "CaseStudy", path: "/casestudy" },
   { name: "LogIn", path: "/login" },
-  { name: "Sign up", path: "/signup" },
   // { name: "About us", path: "/about" },
 
   // { name: "Contact us", path: "/contactus" }, 

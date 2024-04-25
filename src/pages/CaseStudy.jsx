@@ -2,7 +2,7 @@ import  { useState, useEffect } from 'react';
 
 import axios from 'axios'
 import { Link } from 'react-router-dom';
-const AllBlogs = () => {
+const CaseStudy = () => {
     const [blogs, setBlogs] = useState([]);
     const [error, setError] = useState(null);
   
@@ -20,10 +20,10 @@ const AllBlogs = () => {
     }, []);
   return (
     <>
-        <h1 className="text-4xl font-bold mb-4 text-center my-10"> AllBlogs</h1>
-        <Link to={'/createblog'}>
+        <h1 className="text-4xl font-bold mb-4 text-center my-10"> All Case Study</h1>
+        <Link to={'/createCaseStudy/'}>
         <div className='flex justify-end mr-8'>
-        <div className='fixed bg-green-500 z-10 hover:bg-green-700  text-white font-bold py-2 px-4 rounded'>+ Create New Blog</div>
+        <div className='fixed bg-green-500 z-10 hover:bg-green-700  text-white font-bold py-2 px-4 rounded'>+ Create New CaseStudy</div>
         </div> 
         </Link>
 
@@ -32,7 +32,7 @@ const AllBlogs = () => {
 
         
          {blogs.map((blog,i) => (
-        <Link to={`/blogdetail/${blog._id}`} key={blog._id}>
+        <Link to={`/update/CaseStudy/${blog._id}`} key={blog._id}>
         
 
 
@@ -64,4 +64,4 @@ const AllBlogs = () => {
   )
 }
 
-export default AllBlogs
+export default CaseStudy
