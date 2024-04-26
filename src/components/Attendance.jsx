@@ -95,7 +95,7 @@ export default Attendance;
 
 
 
-thats old code 
+// thats old code 
 // import  { useState } from 'react';
 // import axios from 'axios';
 // import { useParams } from 'react-router-dom';
