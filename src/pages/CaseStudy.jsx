@@ -3,14 +3,21 @@ import  { useState, useEffect } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 const CaseStudy = () => {
-    const [blogs, setBlogs] = useState([]);
+    const [casestudies, setCaseStudies] = useState([]);
     const [error, setError] = useState(null);
   
     useEffect(() => {
       const fetchBlogs = async () => {
         try {
-          const response = await axios.get('http://localhost:8000/api/blog/getallblogs');
-          setBlogs(response.data);
+          const response = await axios.get('http://localhost:8000/api/casestudy/get');
+          setCaseStudies(response.data);
+          // backgroundImage
+            // heading
+            // text
+
+
+          // console.log(response.data)
+          console.log(casestudies)
         } catch (error) {
           setError(error.response.data.message || 'An error occurred while fetching blogs.');
         }
@@ -31,20 +38,20 @@ const CaseStudy = () => {
         <main className='flex flex-wrap justify-center items-center text-center gap-8 pt-8'> 
 
         
-         {blogs.map((blog,i) => (
-        <Link to={`/update/CaseStudy/${blog._id}`} key={blog._id}>
+         {casestudies.map((item,i) => (
+        <Link to={`/update/CaseStudy/${item._id}`} key={item._id}>
         
 
 
 <div className='blog-cart max-w-80'>
 <h3>{i+1}</h3>
-<img className=' w-fit' src={blog.imageUrl} alt="" />
-<h3 className='my-2'>{blog.heading}</h3>
-<p>{blog.p}</p>
+<img className=' w-fit' src={item.backgroundImage} alt="" />
+<h3 className='my-2'>{item.heading}</h3>
+<p>{item.text}</p>
 <div className="postman text-left">
-<img className='h-[30px] w-fit rounded-full' src={blog.img} alt="" />
-<p>{blog.name}</p>
-<p className='text-gray-600'>{blog.post}</p>
+{/* <img className='h-[30px] w-fit rounded-full' src={casestudies.img} alt="" />
+<p>{casestudies.name}</p>
+<p className='text-gray-600'>{casestudies.post}</p> */}
 <p className="postdate text-gray-600"></p>
 </div>
 </div>

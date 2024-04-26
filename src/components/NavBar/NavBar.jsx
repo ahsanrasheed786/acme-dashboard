@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import "./NavBar.css";
 import { HamburgetMenuClose, HamburgetMenuOpen } from "./Icons";
+import axios from "axios";
+import toast from "react-hot-toast";
 // import iklogo from "../../../public/images/Ik developers.png";
 // // import logo from "../../../public/images/Vector.png";
 // import logo from "../../../public/images/logo/1.png";
@@ -16,7 +18,7 @@ const navigation = [
   { name: "Home", path: "/" },
   { name: "Profile", path: "/profile" },
   { name: "Blogs", path: "/allblogs" },
-
+{ name: "Attendance", path: "/attendance" },
   { name: "About", path: "/About" },
   { name: "CaseStudy", path: "/casestudy" },
   { name: "LogIn", path: "/login" },
@@ -29,6 +31,17 @@ function NavBar() {
   const [click, setClick] = useState(false);
 
   const handleClick = () => setClick(!click);
+
+
+ const  logoutHandler = async() => {
+    const logout =  await axios.get('http://localhost:8000/api/user/logout')
+toast.success(logout.data.message)
+     // withCredentials: true,
+      // localStorage.clear();
+      // window.location.href = "/login";
+
+    
+  }
   return (
     <>
       <nav className="navbar">
@@ -54,7 +67,6 @@ function NavBar() {
                 </NavLink>
               </li>
             ))} */}
-
             {navigation.map((nav, i) => (
               <li key={i} className="nav-item">
                 <NavLink to={nav.path} activeClassName="active" className="nav-links" onClick={handleClick}>
@@ -62,6 +74,8 @@ function NavBar() {
                 </NavLink>
               </li>
             ))}
+
+<button onClick={logoutHandler}>LogOut</button>
 
            
             <li>

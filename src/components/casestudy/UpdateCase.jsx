@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-
+import { useParams } from 'react-router-dom';
 const UpdateCaseStudy = () => {
+  const { id } = useParams();
   const [caseStudy, setCaseStudy] = useState({
     backgroundImage: '',
     moboImg: '',
@@ -24,6 +25,55 @@ const UpdateCaseStudy = () => {
     Process: [{ theProblem: '', theSoluction: '', theResult: '' }]
   });
 
+  useEffect(() => {
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/api/casestudy/get/${id}`, {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        });
+        setCaseStudy(response.data.content);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  },[])
+  const handleUpdate = async () => {
+const confirmation = await  confirm("Are you sure you want to update this case study?")
+if (!confirmation) {
+  return;
+}
+
+    try {
+      const response = await axios.patch(`http://localhost:8000/api/casestudy/update/${id}`, caseStudy, {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
+      });
+      console.log(response);
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
+  const handleDelete = async () => {
+    const confirmation = await  confirm("Are you sure you want to update this case study?")
+if (!confirmation) {
+  return;
+}
+    try {
+      const response = await axios.delete(`http://localhost:8000/api/casestudy/get/${id}`, caseStudy, {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
+      });
+      console.log(response);
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCaseStudy({ ...caseStudy, [name]: value });
@@ -47,17 +97,10 @@ const UpdateCaseStudy = () => {
     setCaseStudy({ ...caseStudy, Process: updatedProcess });
   };
 
-  const handleSubmit = async () => {
-    try {
-      const response = await axios.post('http://localhost:8000/api/casestudy/create', caseStudy, {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true,
-      });
-      toast.success(response.data.message);
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
-  };
+  
+
+ 
+
 
   return (
     <div className="max-w-4xl mx-auto p-4 bg-gray-100 rounded-lg shadow-lg">
@@ -136,11 +179,7 @@ const UpdateCaseStudy = () => {
 
       </div>
         {/* ... */}
-        {/* <div className="mb-4">
-        <label htmlFor="detail" className="block text-gray-700 font-bold mb-2">Detail</label>
-        <input type="text" name="detail" placeholder="Detail" value={caseStudy.detail} onChange={handleChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
-      </div> */}
-              {/* ... */}
+      
 
       {/* Add input fields for screenScreenshort array */}
       {caseStudy.screenScreenshort.map((item, index) => (
@@ -206,8 +245,16 @@ const UpdateCaseStudy = () => {
         </div>
       ))}
 
-      <button type="button" onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 w-full">Submit</button>
+
+      <button type="button" onClick={handleUpdate}  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 w-full">Update</button>
+      <button type="button" onClick={handleDelete}  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4 w-full">Delete</button>
+
     </div>
+// {/* <div>
+//   {console.log(caseStudy)}
+// </div> */}
+
+
   );
 };
 

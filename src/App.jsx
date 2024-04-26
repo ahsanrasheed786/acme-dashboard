@@ -13,6 +13,7 @@ import Signup from "./components/SignUp"
 import CaseStudy from "./pages/CaseStudy"
 import UpdateCaseStudy from "./components/casestudy/UpdateCase"
 import CreateCaseStudy from "./components/casestudy/CreateCaseStudy.jsx"
+import Attendance from "./components/Attendance.jsx"
 
 
 
@@ -35,7 +36,7 @@ function App() {
     <Route path="/createblog/" element={<CreateNewBlog/>} />
     <Route path="/update/CaseStudy/:id" element={<UpdateCaseStudy/>} />
     <Route path="/createCaseStudy/" element={<CreateCaseStudy/>} />
-
+<Route path="/attendance/" element={<Attendance/>} />
 
 
 
