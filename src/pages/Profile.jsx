@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import moment from 'moment';
+import { myServerUrl } from '../App';
 
 const Profile = () => {
   const { id } = useParams()
@@ -13,12 +14,10 @@ const Profile = () => {
   const [isChecked, setIsChecked] = useState();
   const [isSubAdmin, setIsSubAdmin] = useState();
 
-
-
   const handleToggle = async() => {
 
     try {
-      const response = await axios.patch(`http://localhost:8000/api/user/updateUser/${id}`, { isAdmin: !user.isAdmin });
+      const response = await axios.patch(`${myServerUrl}api/user/updateUser/${id}`, { isAdmin: !user.isAdmin });
       setUser(prevUser => ({...prevUser,isAdmin: response.data.user.isAdmin}));
        setIsChecked(response.data.user.isAdmin);
        console.log(response.data.message);
@@ -33,7 +32,7 @@ const Profile = () => {
 
   const handleSubAdminToggle = async() => {
     try {
-      const response = await axios.patch(`http://localhost:8000/api/user/updateUser/${id}`, { isSubAdmin: !user.isSubAdmin });
+      const response = await axios.patch(`${myServerUrl}api/user/updateUser/${id}`, { isSubAdmin: !user.isSubAdmin });
       setUser(prevUser => ({...prevUser,isSubAdmin: response.data.user.isSubAdmin}));
        setIsSubAdmin(response.data.user.isSubAdmin);
        toast.success(response.data.message)
@@ -46,7 +45,7 @@ const Profile = () => {
 const handlerdelete = async() => {
 
   try {
-    const response = await axios.delete(`http://localhost:8000/api/user/deleteUser/${id}`)
+    const response = await axios.delete(`${myServerUrl}api/user/deleteUser/${id}`)
     toast.success(response.data.message)
   } catch (error) {
     toast.error(error.message)
@@ -64,7 +63,7 @@ const onTimeHandler = async() => {
       // offTime: '10',
        };
   try { 
-    const response = await axios.post(`http://localhost:8000/api/user/attendance/${id}`, {
+    const response = await axios.post(`${myServerUrl}api/user/attendance/${id}`, {
       attendance: attendanceData,
     });
     console.log(response.data)
@@ -86,7 +85,7 @@ const  offTimeHandler = async() => {
       offTime: '10',
        };
   try { 
-    const response = await axios.post(`http://localhost:8000/api/user/attendance/${id}`, {
+    const response = await axios.post(`${myServerUrl}api/user/attendance/${id}`, {
       attendance: attendanceData,
     });
     console.log(response.data)
@@ -95,8 +94,6 @@ const  offTimeHandler = async() => {
     toast.error(error.message)
   }
 }
-
-
 
     // const  handleAttendance = async (attendanceType) => {
     //   const confirmMessage = `Are you sure you want to mark your ${attendanceType} attendance?`;
@@ -122,7 +119,7 @@ const  offTimeHandler = async() => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/user/getuser/${id}`)
+        const response = await axios.get(`${myServerUrl}api/user/getuser/${id}`)
         setUser(response.data.user)
         setIsChecked(response.data.user.isAdmin)
         setIsSubAdmin(response.data.user.isSubAdmin)
@@ -182,17 +179,14 @@ const  offTimeHandler = async() => {
 
             <p className="text-gray-700">
         <strong>Today Date:</strong>
-        {/* <input type="date" value={currDate} /> */}
        { moment().format("MMM Do YYYY")}
       </p>
       <p className="text-gray-700">
         <strong>Day:</strong>
-        {/* <input type="text" value={currDay} /> */}
         {moment().format('dddd')=='Sunday'?'OFF':moment().format('dddd')}
       </p>
       <p className="text-gray-700">
         <strong>Time:</strong>
-        {/* <input type="time" value={currTime} /> */}
         {moment().format(' h:mm: a')}
       </p>
 

@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { myServerUrl } from "../App"
 
 
 
@@ -11,7 +12,7 @@ useEffect( ()  => {
 
 const fetchData = async () =>  {
   try {
-    const response = await axios.get(`http://localhost:8000/api/user/alluser`)
+    const response = await axios.get(`${myServerUrl}api/user/alluser`)
     setUsers(response.data)
     // console.log(response.data)
   } catch (error) {
@@ -39,7 +40,7 @@ fetchData()
 {
   users.map((item) => {
     return (
-      <Link key={item._id} to={`/profile/${item._id}`}>
+      <Link  key={item._id} to={`/profile/${item._id}`}>
       <div >
 <div className="bg-white p-4 rounded-lg shadow-lg flex flex-col md:flex-row md:space-x-4 leading-10">
   <div className="flex-shrink-0">

@@ -1,7 +1,8 @@
 
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { myServerUrl } from '../../App';
 
 const CreateNewBlog = () => {
   const [blogData, setBlogData] = useState({
@@ -52,7 +53,7 @@ const CreateNewBlog = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/blog/createblog', blogData, {
+      const response = await axios.post(`${myServerUrl}api/blog/createblog`, blogData, {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true,
       });
@@ -100,17 +101,7 @@ const CreateNewBlog = () => {
       </div>
       <div className="ml-3 text-gray-700 font-medium">{blogData.isImageRight? 'ON' : 'OFF'}</div>
              </label>
-
-  <label htmlFor="img" className="block mb-2">IMG:</label>
-  <input type="text" id="img" name="img" placeholder="IMG" value={blogData.img} onChange={handleChange} className="input" />
-
-  <label htmlFor="name" className="block mb-2">Name:</label>
-  <input type="text" id="name" name="name" placeholder="Name" value={blogData.name} onChange={handleChange} className="input" />
-
-  <label htmlFor="post" className="block mb-2">Post:</label>
-  <input type="text" id="post" name="post" placeholder="Post" value={blogData.post} onChange={handleChange} className="input" />
-
-      {/* Detail section */}
+ {/* Detail section */}
       <div>
         <h3 className="text-xl font-semibold mb-2">Details:</h3>
         {blogData.detail.map((detail, index) => (

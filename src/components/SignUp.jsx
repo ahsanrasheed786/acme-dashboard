@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { myServerUrl } from "../App";
 
 
 const Signup = () => {
@@ -20,8 +21,8 @@ const Signup = () => {
     e.preventDefault();
     setLoading(true);
 try {
-  
-  const responce=await axios.post("http://localhost:8000/api/user/register",
+  // http://localhost:8000/api/user/register
+  const responce=await axios.post(`${myServerUrl}api/user/register`,
   {name, username,phone ,email, password,post,image},
   {headers: { 'Content-Type': 'application/json' }},
   {withCredentials: true} )  

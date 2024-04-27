@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { myServerUrl } from '../../App';
 
 const CreateCaseStudy = () => {
   const [caseStudy, setCaseStudy] = useState({
@@ -49,7 +50,7 @@ const CreateCaseStudy = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('http://localhost:8000/api/casestudy/create', caseStudy, {
+      const response = await axios.post(`${myServerUrl}api/casestudy/create`, caseStudy, {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true,
       });

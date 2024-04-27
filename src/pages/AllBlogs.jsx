@@ -2,6 +2,7 @@ import  { useState, useEffect } from 'react';
 
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import { myServerUrl } from '../App';
 const AllBlogs = () => {
     const [blogs, setBlogs] = useState([]);
     const [error, setError] = useState(null);
@@ -9,7 +10,7 @@ const AllBlogs = () => {
     useEffect(() => {
       const fetchBlogs = async () => {
         try {
-          const response = await axios.get('http://localhost:8000/api/blog/getallblogs');
+          const response = await axios.get(`${myServerUrl}api/blog/getallblogs`);
           setBlogs(response.data);
         } catch (error) {
           setError(error.response.data.message || 'An error occurred while fetching blogs.');

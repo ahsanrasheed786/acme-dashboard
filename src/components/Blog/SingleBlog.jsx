@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { myServerUrl } from '../../App';
 
 const SingleBlog = () => {
   const { id } = useParams();
@@ -19,7 +20,7 @@ const SingleBlog = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/blog/getblog/${id}`);
+        const response = await axios.get(`${myServerUrl}api/blog/getblog/${id}`);
         setBlog(response.data.blog);
       } catch (error) {
         toast.error(error.response.data.message);
@@ -36,7 +37,7 @@ if (!confirmation) {
 }
 
     try {
-      const response = await axios.patch(`http://localhost:8000/api/blog/updateblog/${id}`, updatedBlog);
+      const response = await axios.patch(`${myServerUrl}api/blog/updateblog/${id}`, updatedBlog);
       console.log(response.data);
       if (response.data.success) {
         toast.success(response.data.message);
@@ -54,7 +55,7 @@ if (!confirmation) {
     }
     
         try {
-          const response = await axios.delete(`http://localhost:8000/api/blog/deleteblog/${id}`);
+          const response = await axios.delete(`${myServerUrl}api/blog/deleteblog/${id}`);
            
           setDeleted(!response.data.success)
           if (response.data.success) {

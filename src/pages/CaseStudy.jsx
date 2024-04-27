@@ -2,14 +2,15 @@ import  { useState, useEffect } from 'react';
 
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import { myServerUrl } from '../App';
 const CaseStudy = () => {
     const [casestudies, setCaseStudies] = useState([]);
     const [error, setError] = useState(null);
-  
+    
     useEffect(() => {
       const fetchBlogs = async () => {
         try {
-          const response = await axios.get('http://localhost:8000/api/casestudy/get');
+          const response = await axios.get(`${myServerUrl}api/casestudy/get`);
           setCaseStudies(response.data);
           // backgroundImage
             // heading

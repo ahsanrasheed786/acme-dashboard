@@ -16,7 +16,7 @@ import CreateCaseStudy from "./components/casestudy/CreateCaseStudy.jsx"
 import Attendance from "./components/Attendance.jsx"
 
 
-
+export const myServerUrl ="https://acme-backend-server.onrender.com/"
 
 function App() {
   return (

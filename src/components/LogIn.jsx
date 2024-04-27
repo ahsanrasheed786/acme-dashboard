@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { myServerUrl } from '../App';
 
 const LoginForm = () => {
   const [isLoggedIn, setIsLoggedIn] = useState('');
@@ -16,7 +17,9 @@ const LoginForm = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:8000/api/user/login', {
+      // 'http://localhost:8000/api/user/login'
+      // ${myServerUrl}
+      const response = await axios.post(`${myServerUrl}api/user/login`, {
         username,
         password,
       }, {

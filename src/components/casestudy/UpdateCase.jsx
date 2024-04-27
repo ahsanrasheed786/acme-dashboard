@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
+import { myServerUrl } from '../../App';
 const UpdateCaseStudy = () => {
   const { id } = useParams();
   const [caseStudy, setCaseStudy] = useState({
@@ -29,7 +30,7 @@ const UpdateCaseStudy = () => {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/casestudy/get/${id}`, {
+        const response = await axios.get(`${myServerUrl}api/casestudy/get/${id}`, {
           headers: { 'Content-Type': 'application/json' },
           withCredentials: true,
         });
@@ -47,7 +48,7 @@ if (!confirmation) {
 }
 
     try {
-      const response = await axios.patch(`http://localhost:8000/api/casestudy/update/${id}`, caseStudy, {
+      const response = await axios.patch(`${myServerUrl}api/casestudy/update/${id}`, caseStudy, {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true,
       });
@@ -64,7 +65,7 @@ if (!confirmation) {
   return;
 }
     try {
-      const response = await axios.delete(`http://localhost:8000/api/casestudy/get/${id}`, caseStudy, {
+      const response = await axios.delete(`${myServerUrl}api/casestudy/get/${id}`, caseStudy, {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true,
       });
