@@ -1,20 +1,24 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { myServerUrl } from '../App';
+import { context } from '../main';
 
-const LoginForm = () => {
+const LoginForm = ({userAuth}) => {
   const [isLoggedIn, setIsLoggedIn] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+const {isAuthenticated,setIsAuthenticated ,loading,setLoading}=useContext(context)
+if(userAuth)return navigate('/')
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    // setLoading(true);
 
     try {
       // 'http://localhost:8000/api/user/login'
@@ -29,9 +33,10 @@ const LoginForm = () => {
       if (response.data.success) {
         setIsLoggedIn(response.data.success);
         navigate('/');
+        setIsAuthenticated(true)
         toast.success(response.data.message);
+        setIsAuthenticated(true)
       }
-
 
     } catch (error) {
       toast.error(error.response.data.message);
@@ -39,6 +44,7 @@ const LoginForm = () => {
     } 
     finally {
       setIsLoading(false);
+      // setLoading(false)
     }
   };
 

@@ -1,12 +1,13 @@
 import  { useEffect, useState } from 'react'
 import { MdDelete } from "react-icons/md";
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import moment from 'moment';
 import { myServerUrl } from '../App';
 
-const Profile = () => {
+const Profile = ({userAuth}) => {
+  let navigate=useNavigate()
   const { id } = useParams()
   const [isLoading, setIsLoading] = useState(false);
 
@@ -17,7 +18,10 @@ const Profile = () => {
   const handleToggle = async() => {
 
     try {
-      const response = await axios.patch(`${myServerUrl}api/user/updateUser/${id}`, { isAdmin: !user.isAdmin });
+      const response = await axios.patch(`${myServerUrl}api/user/updateUser/${id}`, { isAdmin: !user.isAdmin } ,{
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
+      });
       setUser(prevUser => ({...prevUser,isAdmin: response.data.user.isAdmin}));
        setIsChecked(response.data.user.isAdmin);
        console.log(response.data.message);
@@ -32,7 +36,10 @@ const Profile = () => {
 
   const handleSubAdminToggle = async() => {
     try {
-      const response = await axios.patch(`${myServerUrl}api/user/updateUser/${id}`, { isSubAdmin: !user.isSubAdmin });
+      const response = await axios.patch(`${myServerUrl}api/user/updateUser/${id}`, { isSubAdmin: !user.isSubAdmin },{
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
+      });
       setUser(prevUser => ({...prevUser,isSubAdmin: response.data.user.isSubAdmin}));
        setIsSubAdmin(response.data.user.isSubAdmin);
        toast.success(response.data.message)
@@ -87,6 +94,9 @@ const  offTimeHandler = async() => {
   try { 
     const response = await axios.post(`${myServerUrl}api/user/attendance/${id}`, {
       attendance: attendanceData,
+    },{
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
     });
     console.log(response.data)
     toast.success(response.data.message)
@@ -117,9 +127,13 @@ const  offTimeHandler = async() => {
 
 
   useEffect(() => {
+    if (!userAuth) return navigate('/login')
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${myServerUrl}api/user/getuser/${id}`)
+        const response = await axios.get(`${myServerUrl}api/user/getuser/${id}`, {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        })
         setUser(response.data.user)
         setIsChecked(response.data.user.isAdmin)
         setIsSubAdmin(response.data.user.isSubAdmin)

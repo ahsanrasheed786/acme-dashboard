@@ -1,16 +1,22 @@
 import  { useState, useEffect } from 'react';
 
 import axios from 'axios'
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { myServerUrl } from '../App';
-const AllBlogs = () => {
+const AllBlogs = ({userAuth}) => {
+  let navigate = useNavigate();
     const [blogs, setBlogs] = useState([]);
     const [error, setError] = useState(null);
   
+      
     useEffect(() => {
+      if (!userAuth) return navigate('/login')
       const fetchBlogs = async () => {
         try {
-          const response = await axios.get(`${myServerUrl}api/blog/getallblogs`);
+          const response = await axios.get(`${myServerUrl}api/blog/getallblogs`, {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,  
+          });
           setBlogs(response.data);
         } catch (error) {
           setError(error.response.data.message || 'An error occurred while fetching blogs.');

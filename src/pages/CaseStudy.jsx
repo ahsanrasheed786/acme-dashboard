@@ -1,16 +1,22 @@
 import  { useState, useEffect } from 'react';
 
 import axios from 'axios'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate,  } from 'react-router-dom';
 import { myServerUrl } from '../App';
-const CaseStudy = () => {
+const CaseStudy = ({userAuth}) => {
     const [casestudies, setCaseStudies] = useState([]);
     const [error, setError] = useState(null);
+    let navigate = useNavigate();
     
     useEffect(() => {
+      if (!userAuth) return navigate('/login')
+
       const fetchBlogs = async () => {
         try {
-          const response = await axios.get(`${myServerUrl}api/casestudy/get`);
+          const response = await axios.get(`${myServerUrl}api/casestudy/get`, {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
+          });
           setCaseStudies(response.data);
           // backgroundImage
             // heading
