@@ -51,7 +51,7 @@ const Attendance = () => {
       
       setCurrentDay(currentDay);
       const currentDate = `${checkOutDate.getDate()}/${checkOutDate.getMonth() + 1}/${checkOutDate.getFullYear()}`;
-      const officeTime= `${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+      const officeTime= `${hours}:${minutes}:${seconds}`;
 
       if (!savedCheckInTime) {
         toast.error('No check-in time found');
